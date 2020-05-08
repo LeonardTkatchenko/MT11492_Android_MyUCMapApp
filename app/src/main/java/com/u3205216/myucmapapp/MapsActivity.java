@@ -170,7 +170,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
         //uc center map location
         final LatLng uc = new LatLng(-35.23843, 149.0842616);
         //center google map on uc center
@@ -318,8 +317,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         });
-
-
     }
 
     @Override
