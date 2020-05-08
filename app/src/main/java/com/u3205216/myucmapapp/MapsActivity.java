@@ -3,6 +3,7 @@ package com.u3205216.myucmapapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -231,6 +232,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
             }
         });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                //TODO: Improve Repetitious Code
+                if (marker.getId().equals(ucLibrary.getId())) {
+                    Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra("url", "https://www.canberra.edu.au/library");
+                    startActivity(intent);
+                }
+                if (marker.getId().equals(ucStdCentre.getId())) {
+                    Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra("url", "https://www.canberra.edu.au/current-students");
+                    startActivity(intent);
+                }
+                if (marker.getId().equals(ucCoffee.getId())) {
+                    Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra("url", "https://www.unilodge.com.au/unilodge-uc-lodge-cooper-lodge");
+                    startActivity(intent);
+                }
+                if (marker.getId().equals(ucBrumbies.getId())) {
+                    Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra("url", "https://www.canberra.edu.au/on-campus/facilities/sporting-facilities");
+                    startActivity(intent);
+                }
+                if (marker.getId().equals(ucLab6B14.getId())) {
+                    Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                    intent.putExtra("url", "https://www.canberra.edu.au/maps/buildings-directory/building-6");
+                    startActivity(intent);
+                }
+            }
+        });
+
 
     }
 
