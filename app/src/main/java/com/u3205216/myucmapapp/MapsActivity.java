@@ -3,6 +3,7 @@ package com.u3205216.myucmapapp;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
@@ -50,18 +52,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         LatLng uc = new LatLng(-35.2384551,149.0844455);
-        // Flat markers will rotate when the map is rotated,
-        // and change perspective when the map is tilted.
-        /*
-        final Marker ucMarker = mMap.addMarker(new MarkerOptions()
-                //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_uc))
-                .position(uc)
-                .flat(true)
-                .rotation(245)
-                .title("University of Canberra")
-                .snippet("Bruce Campus")
-        );
-        */
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uc, 13));
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
@@ -88,9 +78,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 coordListUC.add(new LatLng(-35.232478, 149.079656));
 
                 //add all LatLng coordinates for polygon to outline UC
-                mMap.addPolygon(new PolygonOptions().geodesic(true)
+                Polygon uc_polygon = mMap.addPolygon(new PolygonOptions().geodesic(true)
                         .addAll(coordListUC)
                 );
+
+                //fill entire campus area with colour
+                uc_polygon.setFillColor(getResources().getColor(R.color.colorFilledArea, getTheme()));
+                //set campus area outline colour
+                uc_polygon.setStrokeColor(getResources().getColor(R.color.colorLightBorder, getTheme()));
+
+                //event listener for click events when user taps on a location within the UC Map
+                uc_polygon.setClickable(true);
+                mMap.setOnPolygonClickListener(new GoogleMap.OnPolygonClickListener() {
+                    @Override
+                    // user taps on a location within UC Map
+                    public void onPolygonClick(Polygon polygon) {
+                        // Change campus border to dark color
+                        //NOTE: No requirement to turn border back to light color
+                        polygon.setStrokeColor(getResources().getColor(R.color.colorDarkBorder, getTheme()));
+                        //display 'University of Canberra' Toast for 2 seconds
+                        Toast.makeText(getApplicationContext(),"University of Canberra", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 // Get the bounds of the campus then zoom to it
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
