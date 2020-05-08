@@ -1,11 +1,14 @@
 package com.u3205216.myucmapapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,7 +57,120 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng uc = new LatLng(-35.2384551,149.0844455);
+        //TODO: Make marker variable names more explicit/less confusing. Use Hungarian Notation?
+        //The 5 marker locations
+        LatLng library = new LatLng(-35.2379694,149.0835983);
+        LatLng studentCentre = new LatLng(-35.2389136, 149.0847174);
+        LatLng coffeeGrounds = new LatLng(-35.2389448, 149.0822645);
+        LatLng brumbiesRugby = new LatLng(-35.2383813, 149.0884262);
+        LatLng lab6B14 = new LatLng(-35.236254, 149.083987);
+
+        //library marker
+        final Marker ucLibrary = mMap.addMarker(new MarkerOptions()
+                .title("UC Library")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_library))
+                .snippet("24 Hr access for all students and staff")
+                .position(library)
+                .draggable(false));
+
+        //Student Centre marker
+        final Marker ucStdCentre = mMap.addMarker(new MarkerOptions()
+                .title("Student Centre")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_std_centre))
+                .snippet("Your gateway to access support and advice")
+                .position(studentCentre)
+                .draggable(false));
+
+        //Coffee Grounds marker
+        final Marker ucCoffee = mMap.addMarker(new MarkerOptions()
+                .title("UC Cooper Lodge")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_coffee))
+                .snippet("The Best Coffee on campus, underneath Cooper Lodge")
+                .position(coffeeGrounds)
+                .draggable(false));
+
+        //Brumbies Rugby marker
+        final Marker ucBrumbies = mMap.addMarker(new MarkerOptions()
+                .title("UC Brumbies")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_rumbies))
+                .snippet("Open to students, staff, and the general public.")
+                .position(brumbiesRugby)
+                .draggable(false));
+
+        //Lab6B14 marker
+        final Marker ucLab6B14 = mMap.addMarker(new MarkerOptions()
+                .title("Innovation Lab")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_lab6b14))
+                .snippet("Lab 6B14 in Building 6")
+                .position(lab6B14)
+                .draggable(false));
+
+        //custom info window layout for different markers on map
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            //inflate selected marker and fill with related information
+            @Override
+            public View getInfoContents(Marker marker) {
+                //added suppression to remove "avoid passing 'null' as the view root" warning
+                @SuppressLint("InflateParams") View infoWindow = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+
+                TextView title = infoWindow.findViewById(R.id.textViewTitle);
+                TextView snippet = infoWindow.findViewById(R.id.textViewSnippet);
+                ImageView image = infoWindow.findViewById(R.id.imageView);
+
+                //UC Library custom info window
+                if (marker.getId().equals(ucLibrary.getId())) {
+                    title.setText(marker.getTitle());
+                    snippet.setText(marker.getSnippet());
+                    image.setImageDrawable(getResources()
+                            .getDrawable(R.mipmap.ic_library, getTheme()));
+                }
+
+                //UC Student Centre custom info window
+                if (marker.getId().equals(ucStdCentre.getId())) {
+                    title.setText(marker.getTitle());
+                    snippet.setText(marker.getSnippet());
+                    image.setImageDrawable(getResources()
+                            .getDrawable(R.mipmap.ic_std_centre, getTheme()));
+                }
+
+                //UC Coffee Grounds custom info window
+                if (marker.getId().equals(ucCoffee.getId())) {
+                    title.setText(marker.getTitle());
+                    snippet.setText(marker.getSnippet());
+                    image.setImageDrawable(getResources()
+                            .getDrawable(R.mipmap.ic_coffee, getTheme()));
+                }
+
+                //UC Brumbies custom info window
+                if (marker.getId().equals(ucBrumbies.getId())) {
+                    title.setText(marker.getTitle());
+                    snippet.setText(marker.getSnippet());
+                    image.setImageDrawable(getResources()
+                            .getDrawable(R.mipmap.ic_rumbies, getTheme()));
+                }
+
+                //UC Lab6B14 custom info window
+                if (marker.getId().equals(ucLab6B14.getId())) {
+                    title.setText(marker.getTitle());
+                    snippet.setText(marker.getSnippet());
+                    image.setImageDrawable(getResources()
+                            .getDrawable(R.mipmap.ic_lab6b14, getTheme()));
+                }
+
+                return infoWindow;
+
+            }
+        });
+
+
+        //uc center map location
+        LatLng uc = new LatLng(-35.23843, 149.0842616);
+        //center google map on uc center
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uc, 13));
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
