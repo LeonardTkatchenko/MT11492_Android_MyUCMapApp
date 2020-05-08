@@ -21,7 +21,14 @@ public class WebViewActivity extends AppCompatActivity {
         wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         if(savedInstanceState == null) {
-            wv.loadUrl("https://www.canberra.edu.au/");
+            Bundle extras = getIntent().getExtras();
+            if (extras == null){
+                wv.loadUrl("https://www.canberra.edu.au/");
+            } else {
+                String url = extras.getString("url");
+                wv.loadUrl(url);
+            }
+
         } else {
             String url = (String) savedInstanceState.getSerializable("url");
             wv.loadUrl(url);
