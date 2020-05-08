@@ -23,6 +23,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -55,16 +57,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         //TODO: Make marker variable names more explicit/less confusing. Use Hungarian Notation?
         //The 5 marker locations
-        LatLng library = new LatLng(-35.2379694,149.0835983);
-        LatLng studentCentre = new LatLng(-35.2389136, 149.0847174);
-        LatLng coffeeGrounds = new LatLng(-35.2389448, 149.0822645);
-        LatLng brumbiesRugby = new LatLng(-35.2383813, 149.0884262);
-        LatLng lab6B14 = new LatLng(-35.236254, 149.083987);
+        final LatLng library = new LatLng(-35.2379694,149.0835983);
+        final LatLng studentCentre = new LatLng(-35.2389136, 149.0847174);
+        final LatLng coffeeGrounds = new LatLng(-35.2389448, 149.0822645);
+        final LatLng brumbiesRugby = new LatLng(-35.2383813, 149.0884262);
+        final LatLng lab6B14 = new LatLng(-35.236254, 149.083987);
 
         //library marker
         final Marker ucLibrary = mMap.addMarker(new MarkerOptions()
@@ -170,7 +172,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         //uc center map location
-        LatLng uc = new LatLng(-35.23843, 149.0842616);
+        final LatLng uc = new LatLng(-35.23843, 149.0842616);
         //center google map on uc center
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(uc, 13));
 
@@ -230,6 +232,57 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 int padding = 20; //padding between nMap and edges
                 mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
+
+                //Paths between marker locations
+
+                //Path from central to library:
+                Polyline uc_central_library = googleMap.addPolyline(new PolylineOptions().geodesic(true)
+                        .add(uc)
+                        .add(new LatLng(-35.238330, 149.084180))
+                        .add(new LatLng(-35.238246, 149.084117))
+                        .add(new LatLng(-35.238227, 149.083599))
+                        .add(library)
+                );
+                uc_central_library.setColor(R.color.colorBluePath);
+
+                //Path from central to student centre:
+                Polyline uc_central_stdCentre = googleMap.addPolyline(new PolylineOptions().geodesic(true)
+                        .add(uc)
+                        .add(studentCentre)
+                );
+                uc_central_stdCentre.setColor(R.color.colorBluePath);
+
+                //Path from central to coffee grounds:
+                Polyline uc_central_coffeegnds = googleMap.addPolyline(new PolylineOptions().geodesic(true)
+                        .add(uc)
+                        .add(new LatLng(-35.238636, 149.083690))
+                        .add(new LatLng(-35.238625, 149.082324))
+                        .add(new LatLng(-35.238933, 149.082319))
+                        .add(coffeeGrounds)
+                );
+                uc_central_coffeegnds.setColor(R.color.colorBluePath);
+
+                //Path from central to brumbies rugby:
+                Polyline uc_central_brumbies = googleMap.addPolyline(new PolylineOptions().geodesic(true)
+                        .add(uc)
+                        .add(new LatLng(-35.238770, 149.085382))
+                        .add(new LatLng(-35.238217, 149.085393))
+                        .add(new LatLng(-35.238217, 149.088243))
+                        .add(brumbiesRugby)
+
+                );
+                uc_central_brumbies.setColor(R.color.colorBluePath);
+
+                //Path from central to innovation lab 6b14:
+                Polyline uc_central_lab6b14 = googleMap.addPolyline(new PolylineOptions().geodesic(true)
+                        .add(uc)
+                        .add(new LatLng(-35.236937, 149.084229))
+                        .add(new LatLng(-35.236937, 149.083638))
+                        .add(new LatLng(-35.236254, 149.083641))
+                        .add(lab6B14)
+
+                );
+                uc_central_lab6b14.setColor(R.color.colorBluePath);
             }
         });
 
