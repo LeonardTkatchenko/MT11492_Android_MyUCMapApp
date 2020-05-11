@@ -130,7 +130,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     title.setText(marker.getTitle());
                     snippet.setText(marker.getSnippet());
                     image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_library, getTheme()));
+                            .getDrawable((R.drawable.library), getTheme()));
+
                 }
 
                 //UC Student Centre custom info window
@@ -138,7 +139,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     title.setText(marker.getTitle());
                     snippet.setText(marker.getSnippet());
                     image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_std_centre, getTheme()));
+                            .getDrawable((R.drawable.src), getTheme()));
                 }
 
                 //UC Coffee Grounds custom info window
@@ -146,7 +147,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     title.setText(marker.getTitle());
                     snippet.setText(marker.getSnippet());
                     image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_coffee, getTheme()));
+                            .getDrawable((R.drawable.coffee_grounds), getTheme()));
                 }
 
                 //UC Brumbies custom info window
@@ -154,7 +155,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     title.setText(marker.getTitle());
                     snippet.setText(marker.getSnippet());
                     image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_rumbies, getTheme()));
+                            .getDrawable((R.drawable.brumbies), getTheme()));
                 }
 
                 //UC Lab6B14 custom info window
@@ -162,7 +163,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     title.setText(marker.getTitle());
                     snippet.setText(marker.getSnippet());
                     image.setImageDrawable(getResources()
-                            .getDrawable(R.mipmap.ic_lab6b14, getTheme()));
+                            .getDrawable((R.drawable.lab6b14), getTheme()));
                 }
 
                 return infoWindow;
