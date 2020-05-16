@@ -26,12 +26,16 @@ public class WebViewActivity extends AppCompatActivity {
                 wv.loadUrl("https://www.canberra.edu.au/");
             } else {
                 String url = extras.getString("url");
+                String webTitle = extras.getString("webTitle");
                 wv.loadUrl(url);
+                setTitle(webTitle);
             }
 
         } else {
             String url = (String) savedInstanceState.getSerializable("url");
+            String webTitle = (String) savedInstanceState.getSerializable("webTitle");
             wv.loadUrl(url);
+            setTitle(webTitle);
         }
     }
 }

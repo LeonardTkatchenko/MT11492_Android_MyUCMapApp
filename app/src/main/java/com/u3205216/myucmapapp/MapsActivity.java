@@ -294,26 +294,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (marker.getId().equals(ucLibrary.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/library");
+                    intent.putExtra("webTitle", "UC Library");
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucStdCentre.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/current-students");
+                    intent.putExtra("webTitle", "UC Student Centre");
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucCoffee.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.unilodge.com.au/unilodge-uc-lodge-cooper-lodge");
+                    intent.putExtra("webTitle", "UC Cooper Lodge");
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucBrumbies.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/on-campus/facilities/sporting-facilities");
+                    intent.putExtra("webTitle", "UC Brumbies Rugby");
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucLab6B14.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/maps/buildings-directory/building-6");
+                    intent.putExtra("webTitle", "UC Innovation Lab");
                     startActivity(intent);
                 }
             }
