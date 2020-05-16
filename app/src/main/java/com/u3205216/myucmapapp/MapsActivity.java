@@ -78,7 +78,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //Student Centre marker
         final Marker ucStdCentre = mMap.addMarker(new MarkerOptions()
-                .title("Student Centre")
+                .title("UC Student Centre")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_std_centre))
                 .snippet("Your gateway to access support and advice")
                 .position(studentCentre)
@@ -294,19 +294,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (marker.getId().equals(ucLibrary.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/library");
-                    intent.putExtra("webTitle", "UC Library");
+                    intent.putExtra("webTitle", ucLibrary.getTitle());
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucStdCentre.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/current-students");
-                    intent.putExtra("webTitle", "UC Student Centre");
+                    intent.putExtra("webTitle", ucStdCentre.getTitle());
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucCoffee.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.unilodge.com.au/unilodge-uc-lodge-cooper-lodge");
-                    intent.putExtra("webTitle", "UC Cooper Lodge");
+                    intent.putExtra("webTitle", ucCoffee.getTitle());
                     startActivity(intent);
                 }
                 if (marker.getId().equals(ucBrumbies.getId())) {
@@ -318,7 +318,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (marker.getId().equals(ucLab6B14.getId())) {
                     Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
                     intent.putExtra("url", "https://www.canberra.edu.au/maps/buildings-directory/building-6");
-                    intent.putExtra("webTitle", "UC Innovation Lab");
+                    intent.putExtra("webTitle", ucLab6B14.getTitle());
                     startActivity(intent);
                 }
             }
